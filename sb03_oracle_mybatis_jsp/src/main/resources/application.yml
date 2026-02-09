@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: sb03_oracle_mybatis_jsp
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521/XE
+    username: scott
+    password: tiger
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+
+server:
+  port: 80
+
+#mybatis
+mybatis:
+  mapper-locations: classpath:mappers/**/*.xml
+  config-location: classpath:mybatis-config.xml
