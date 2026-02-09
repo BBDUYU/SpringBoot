@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: sb06_mysql_jpa_thymeleaf
+  datasource:
+    url: jdbc:mysql://localhost:3306/mydb?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: scott
+    password: tiger
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+# JPA 설정
+  jpa:
+    database: mysql
+    generate-ddl: false
+    hibernate:
+       ddl-auto: none
+       naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 80
+
+  
