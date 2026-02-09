@@ -26,7 +26,36 @@
   <xmp class="code"> 
    
   </xmp>
-  <h1>CHacHa's GuestBook List Page</h1>
+  <h1>
+  <span>
+  	<a th:href="@{/guestbook/register}">
+  		<button type="button">REGISTER</button>
+  	</a>
+  </span>
+  CHacHa's GuestBook List Page</h1>
+  <table>
+  	<thead>
+  		<tr>
+  			<th>#</th>
+  			<th>Title</th>
+  			<th>Writer</th>
+  			<th>Regdate</th>
+  		</tr>
+  	</thead>
+  	
+  	<tbody>
+  		<tr th:each="dto :${gblist}">
+  			<td>[[${dto.gno}]]</td>
+  			<td>
+  				<a th:href="@{/guestbook/read(${dto.gno})}">[[${dto.title}]]</a>
+  			</td>
+  			<td>[[${dto.writer}]]</td>
+  			<td>[[${#temporals.format(dto.regDate,'yyyy/MM/dd')}]]</td>
+  		</tr>
+  	</tbody>
+  	
+  	<tfoot></tfoot>
+  </table>
 </div>
 </body>
 </html>

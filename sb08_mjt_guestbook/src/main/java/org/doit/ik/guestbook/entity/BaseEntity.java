@@ -1,6 +1,7 @@
 package org.doit.ik.guestbook.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -18,9 +19,9 @@ import lombok.Getter;
 public class BaseEntity {
 	@CreatedDate // 엔티티 최초생성시 자동으로 작성일 세팅
 	@Column(name="regdate",nullable = false)
-	private LocalDate regDate;
+	private LocalDateTime regDate;
 	
 	@LastModifiedDate // 엔티티가 수정될때
 	@Column(name="moddate")
-	private LocalDate modDate;
+	private LocalDateTime modDate;
 }
