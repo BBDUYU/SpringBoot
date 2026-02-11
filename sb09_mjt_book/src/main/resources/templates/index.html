@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" type="image/x-icon" href="/images/SiSt.ico">
-<title>2026. 2. 9. 오후 12:18:47</title>
+<title>2026. 2. 11. 오전 09:28:38</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <link rel="stylesheet" href="/resources/cdn-main/example.css">
 <script src="/resources/cdn-main/example.js"></script>
@@ -16,7 +16,7 @@
 </head>
 <body>
 <header>
-  <h1 class="main"><a href="#" style="position: absolute;top:30px;">CHacHa's HOme</a></h1>
+  <h1 class="main"><a href="#" style="position: absolute;top:30px;">Zerozhu Home</a></h1>
   <ul>
     <li><a href="#">로그인</a></li>
     <li><a href="#">회원가입</a></li>
@@ -24,14 +24,53 @@
 </header>
 <div>
   <xmp class="code"> 
-	[jpa의 N:1 연관관계 설정과 관리]
-	- DB의 관계 이해
-	- JPA의 연관관계 이해
-	- 엔티티들 간의 연관관계의 DTO처리
-	
+    [JPA의 N:1 연관관계(Association) 설정과 관리]
+     - DB 의 관계 이해
+     - JPA의 연관관계 이해
+     - 엔티티들 간의 연관관계의 DTO 처리 ★★★
+     - REST 방식의 데이터 처리
+     
+     [실습]
+     회원(member)         게시판(board)         댓글(reply)
+         1                 N(다)              
+     회원ID(FK)           글번호(FK)         댓글번호(PK)
+                      작성자(FK, 회원ID)     작성자(FK, 회원ID)
+                                     글번호(FK, 게시판글번호)
+    JPA 연관관계
+        @OneToMany              ★★★ @ManyToOne
+        private Board board;         private Member member;
+        
+        JPA의 연관관계는 DB 설계의 FK를 이용해서 연관관계를 시작(기본 권장)
+    
+    1. sb09_mjt_book 프로젝트 생성
+    1-2. 패키지 추가
+         org.doit.ik.board
+           ㄴ controller
+           ㄴ dto
+           ㄴ entity
+           ㄴ repository
+           ㄴ service
+    2. 날짜/시간 자동 설정
+       BaseEntity 추가, @EnableJpaAuditing 설정
+    3. 엔티티 추가 : 연관관계 X -> O 확인
+       1) 회원 엔티티
+       2) 게시판 엔티티
+       3) 댓글 엔티티
+    
+    4. Repository 패키지
+       1) BoardRepository 인터페이스
+       1) MemberRepository인터페이스
+       1) ReplyRepository 인터페이스
+    5. 테스트 더미 데이터 추가
+    6. BoardRepositoryTests 단위 테스트
+    7. JPQL과 left (outer) join
+    	1) 엔티티가 연관관계 있을 경우
+    	1) 엔티티가 연관관계 없을 경우
   </xmp>
-  <br />
-  <a th:href="@{/board/list}">게시판 목록보기</a>
+  
+  <br>
+  <a th:href="@{/board/list}">게시판 목록 보기</a>
+  
 </div>
 </body>
 </html>
