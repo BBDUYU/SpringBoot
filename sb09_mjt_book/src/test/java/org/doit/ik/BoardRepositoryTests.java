@@ -16,7 +16,18 @@ class BoardRepositoryTests {
 
 	@Autowired
 	private BoardRepository boardRepository;
-
+	
+	@Test
+	void testRead3() {
+		Object result = this.boardRepository.getBoardByBno(11L);
+		Object arr[] = (Object[])result;
+		System.out.println("=".repeat(50));
+		System.out.println(Arrays.toString(arr));
+		System.out.println("=".repeat(50));	   	  
+		
+	}
+	
+/*
 	@Test
 	void testReadWithReplyCount() {
 		Pageable pageable = PageRequest.of(0, 10,Sort.by("bno").descending());
@@ -28,7 +39,7 @@ class BoardRepositoryTests {
 		}
 		System.out.println("=".repeat(50));	   
 	}
-	
+	*/
 	/*
 	@Test
 	void testReadWithReply() {

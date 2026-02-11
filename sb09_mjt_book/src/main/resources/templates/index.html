@@ -66,11 +66,33 @@
     7. JPQL과 left (outer) join
     	1) 엔티티가 연관관계 있을 경우
     	1) 엔티티가 연관관계 없을 경우
-  </xmp>
+    8. 글번호 -> 상세보기 JPQL
+    9. 실제 프로젝트 적용
+    	1) dto 패키지 안에
+    		PageRequestDTO
+    		PageResultDTO
+   		2) dto 패키지 안에
+   			BoardDTO / Board
+   			컨트롤러 / 서비스 -> 뷰
+   			
+   			화면 입출력
+   		3) 게시글 등록
+   			1. BoardRepository.java
+   			2. BoardService.java
+   			   BoardServiceImpl.java
+   			3. BoardController.java
+   			4. register.html	
+   		4) 게시글 목록
+   		5) 게시글 수정
+   		http://localhost/board/modify?bno=72&page=4&type=&keyword=
+   		6) 게시글 삭제
+   		7) 검색
+  </xmp>		
   
   <br>
+  <a th:href="@{/board/register}">게시판 등록</a>
+  <br />
   <a th:href="@{/board/list}">게시판 목록 보기</a>
-  
 </div>
 </body>
 </html>

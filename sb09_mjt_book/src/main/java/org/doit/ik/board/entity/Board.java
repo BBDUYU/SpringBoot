@@ -21,15 +21,23 @@ import lombok.ToString;
 @Getter
 @ToString(exclude = "writer")
 public class Board extends BaseEntity{
-   
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long bno;
-   
-   private String title;
-   private String content;
-   
-   // 작성자 연관관계 설정 X
-   @ManyToOne(fetch=FetchType.LAZY) // 지연로딩 - 응답을 기다리는게 아님 끊어버림 이후에 추가 정보를 가져오려면 @Transactional
-   private Member writer;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long bno;
+
+	private String title;
+	private String content;
+
+	// 작성자 연관관계 설정 X
+	@ManyToOne(fetch=FetchType.LAZY) // 지연로딩 - 응답을 기다리는게 아님 끊어버림 이후에 추가 정보를 가져오려면 @Transactional
+	private Member writer;
+
+	public void changeTitle(String title) {   
+		this.title = title;
+	}
+	
+	public void changeContent(String content) {
+		this.content = content;
+	}
 }

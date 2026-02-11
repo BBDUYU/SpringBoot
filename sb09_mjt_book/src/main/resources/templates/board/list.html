@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" type="image/x-icon" href="/images/SiSt.ico">
+<title>2026. 2. 11. 오후 2:48:17</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<link rel="stylesheet" href="/resources/cdn-main/example.css">
+<script src="/resources/cdn-main/example.js"></script>
+<style>
+ span.material-symbols-outlined{
+    vertical-align: text-bottom;
+ }   
+</style>
+<style>    
+ .pagination li{
+   display: inline-block; 
+ }
+ .pagination li.active a{
+   color: red;
+ }
+</style>
+</head>
+<body>
+<header>
+  <h1 class="main"><a href="#" style="position: absolute;top:30px;">CHacHa's HOme</a></h1>
+  <ul>
+    <li><a href="#">로그인</a></li>
+    <li><a href="#">회원가입</a></li>
+  </ul>
+</header>
+<div>
+  <xmp class="code"> 
+   
+  </xmp>
+  <span>
+   <a th:href="@{/board/register}"><button type="button">REGISTER</button></a>
+  </span> 
+  <br><br>
+  <table>
+  <caption></caption>
+  <thead>
+  	<tr>
+  	<th>#</th>
+  	<th>Title</th>
+  	<th>Writer</th>
+  	<th>Regdate</th>
+  	</tr>
+  </thead>
+  <tbody>
+  	<tr th:each="dto: ${result.dtoList}">
+  		<td>[[${dto.bno}]]</td>
+  		<td>
+  			<a th:href="@{/board/read(bno=${dto.bno},page=${result.page}, size=${result.size}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}">[[${dto.title}]]</a>
+  			<span class="badge right red" th:text="${dto.replyCount}"></span>
+  		</td>
+  		<td>[[${dto.writerName}]](<small>[[${dto.writerEmail}]]</small>)</td>
+  		<td>[[${#temporals.format(dto.regDate,'yyyy/MM/dd')}]]</td>
+  	</tr>
+  </tbody>
+  <tfoot>
+      <tr>
+        <td colspan="4" align="center">
+          <ul class="pagination">
+            <li th:if="${result.prev}">
+              <a th:href="@{/board/list(page=${result.start-1}, size=${result.size}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}">Prev</a>
+            </li>
+            <li th:each="page : ${result.pageList}" th:class="${result.page == page ? 'active': ''}">
+              <a th:href="@{/board/list(page=${page}, size=${result.size}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}">[[${page}]]</a>
+            </li>
+            <li th:if="${result.next}">
+              <a th:href="@{/board/list(page=${result.end+1}, size=${result.size}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}">Next</a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+  
+  <script th:inline="javascript">
+  // th:inline="javascript" 자바스크립트 코딩 안의 
+  // 타임리프 코드를 해석할 수 있도록 하는 옵션 속성이다.
+  // js 코드 안의 서버 데이타(변수)를 안전하게 치환해 주는 역할.
+  // 예) '홍길동' 치환
+  var msg = [[${msg}]];  
+  console.log( msg );
+  if(msg){
+   alert("[모달창]"+ msg + "번 글 등록/삭제!!!");
+  }  
+</script>
+<script th:inline="javascript">
+   var searchForm = $("#searchForm");
+   // <button type="button" class="btn-search">Search</button>
+   $(".btn-search").on("click", function (){
+	   searchForm.submit();
+   });
+   // <button type="button" class="btn-clear">Clear</button>
+   $(".btn-clear").on("click", function (){
+	   searchForm.empty().submit();
+   });
+</script>  
+</div>
+</body>
+</html>
