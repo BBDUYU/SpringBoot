@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" type="image/x-icon" href="/images/SiSt.ico">
+<title>2026. 2. 9. 오후 12:26:13</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<link rel="stylesheet" href="/resources/cdn-main/example.css">
+<script src="/resources/cdn-main/example.js"></script>
+<style>
+span.material-symbols-outlined {
+	vertical-align: text-bottom;
+}
+</style>
+<style>
+.pagination li {
+	display: inline-block;
+}
+
+.pagination li.active a {
+	color: red;
+}
+</style>
+</head>
+<body>
+	<header>
+		<h1 class="main">
+			<a href="#" style="position: absolute; top: 30px;">CHacHa's HOme</a>
+		</h1>
+		<ul>
+			<li><a href="#">로그인</a></li>
+			<li><a href="#">회원가입</a></li>
+		</ul>
+	</header>
+	<div>
+
+		
+
+		<table border="1" cellpadding="5" cellspacing="0">
+			<caption>
+				<form th:action="@{/emp/list}" method="get" id="searchForm">
+				<div style="margin-bottom: 20px;">
+					<input type="hidden" name="page" value="1"> <select
+						name="type">
+						<option value="n" th:selected="${pageRequestDTO.type == 'n'}">사원명</option>
+						<option value="d" th:selected="${pageRequestDTO.type == 'd'}">부서명</option>
+						<option value="nj" th:selected="${pageRequestDTO.type == 'nj'}">사원명+직업</option>
+					</select> <input name="keyword" th:value="${pageRequestDTO.keyword}"
+						placeholder="검색어 입력">
+					<button type="submit" class="btn-search">Search</button>
+				</div>
+				</form>
+			</caption>
+			<thead>
+				<tr>
+					<th>사원번호</th>
+					<th>사원명</th>
+					<th>직업</th>
+					<th>입사일</th>
+					<th>급여</th>
+					<th>부서명</th>
+					<th>부서위치</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="dto : ${result.dtoList}">
+					<td>[[${dto.empno}]]</td>
+					<td>[[${dto.ename}]]</td>
+					<td>[[${dto.job}]]</td>
+					<td th:text="${dto.hiredate}"></td>
+					<td
+						th:text="${#numbers.formatDecimal(dto.sal, 0, 'COMMA', 0, 'POINT')}"></td>
+					<td>[[${dto.dname}]]</td>
+					<td>[[${dto.loc}]]</td>
+				</tr>
+				<tr th:if="${#lists.isEmpty(result.dtoList)}">
+					<td colspan="7">검색 결과가 없습니다.</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<!-- 페이징 처리 -->
+				<tr>
+					<td colspan="8" align="center">
+						<ul class="pagination">
+							<li th:if="${result.prev}"><a
+								th:href="@{/emp/list(page=${result.start - 1}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}">
+									[PREV] </a></li>
+							<li th:each="page : ${result.pageList}"
+								th:class="${result.page == page} ? 'active' : ''"><a
+								th:href="@{/emp/list(page=${page}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}"
+								th:style="${result.page == page} ? 'font-weight:bold; color:red;' : ''">
+									[[${page}]] </a> &nbsp;</li>
+							<li th:if="${result.next}"><a
+								th:href="@{/emp/list(page=${result.end + 1}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}">
+									[NEXT] </a></li>
+						</ul>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+
+	</div>
+
+</body>
+</html>
