@@ -3,13 +3,14 @@ package org.doit.ik.board.repository;
 import java.util.List;
 
 import org.doit.ik.board.entity.Board;
+import org.doit.ik.board.repository.search.SearchBoardRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface BoardRepository extends JpaRepository<Board, Long>{
+public interface BoardRepository extends JpaRepository<Board, Long>, SearchBoardRepository{
 
 	// [1] JPQL  연관관계 O    Board + Member 조인 쿼리
 	//  Object  <-  Object [] ,   [ Board, Member ]

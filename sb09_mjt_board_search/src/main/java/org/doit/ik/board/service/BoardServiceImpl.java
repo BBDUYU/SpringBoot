@@ -43,7 +43,8 @@ public class BoardServiceImpl implements BoardService{
 	public PageResultDTO<BoardDTO, Object[]> getList(PageRequestDTO pageRequestDTO) {
 		log.info("😝 BoardServiceImpl.getList()..." + pageRequestDTO);		
 		Pageable pageable = PageRequest.of(pageRequestDTO.getPage()-1, pageRequestDTO.getSize(), Sort.by("bno").descending());
-		Page<Object []> result = this.boardRepository.getBoardWithReplyCount(pageable);		
+		//Page<Object []> result = this.boardRepository.getBoardWithReplyCount(pageable);		
+		Page<Object []> result=this.boardRepository.searchPage(pageRequestDTO.getType(), pageRequestDTO.getKeyword(), pageable);
 		Function<Object[], BoardDTO> fn = ( en -> entityToDto( (Board)en[0], (Member)en[1], (Long)en[2] ) );	
 		// Page<Object[]>  -> PageResultDTO 변환		
 		return new PageResultDTO<>(result, fn); // 생성자 

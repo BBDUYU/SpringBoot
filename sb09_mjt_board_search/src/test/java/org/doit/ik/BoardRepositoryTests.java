@@ -25,6 +25,18 @@ class BoardRepositoryTests {
 	private BoardRepository boardRepository;
 	
 	@Test
+	public void testSearchPage() {
+		Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending().and(Sort.by("title").ascending()));
+		Page<Object []> result = this.boardRepository.searchPage("tcw", "1", pageable);
+		System.out.println("=".repeat(50));
+		for (Object[] arr : result) {
+			System.out.println(Arrays.toString(arr));
+		} 
+		System.out.println("=".repeat(50));
+	}
+	
+	/*
+	@Test
 	void testRead3() {
 		Object result = this.boardRepository.getBoardByBno(11L);
 		Object[] arr = (Object[])result;		
@@ -32,7 +44,7 @@ class BoardRepositoryTests {
 		System.out.println(Arrays.toString(arr));
 		System.out.println("=".repeat(50));
 	}
-	
+	*/
 	/*
 	@Test
 	void testWithReplyCount() {
