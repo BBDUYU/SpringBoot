@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" type="image/x-icon" href="/images/SiSt.ico">
+<title>2026. 2. 10. 오전 9:26:13</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<link rel="stylesheet" href="/resources/cdn-main/example.css">
+<script src="/resources/cdn-main/example.js"></script>
+<style>
+ span.material-symbols-outlined{
+    vertical-align: text-bottom;
+ }   
+</style>
+</head>
+<body>
+<header>
+  <h1 class="main"><a href="#" style="position: absolute;top:30px;">CHacHa's HOme</a></h1>
+  <ul>
+    <li><a href="#">로그인</a></li>
+    <li><a href="#">회원가입</a></li>
+  </ul>
+</header>
+<div>
+  <br>
+  <a th:href="@{/board/register}">게시판 등록</a>
+  <br>
+  <a th:href="@{/board/list}">게시판 목록 보기</a>
+  <br>
+  <xmp class="code"> 
+      [ Json,Ajax를 이용해서 댓글 처리 ]
+      1. 화면에서 댓글 숫자를 클릭하면 댓글을 가져와서 출력
+      2. 새로운 댓글을 작성
+      3. 댓글 수정, 삭제
+      
+      GET 	 + "/replies/board/{bno}" JSON배열반환(해당 게시글번호의 댓글정보조회)
+      POST   + "/replies"			  댓글 추가(JSON 댓글정보, 추가된 댓글 번호 반환)
+      DELETE + "/replies/{rno}"		  댓글 삭제
+      PUT    + "/replies/{rno}"		  댓글 수정
+      
+      1) Reply.java
+      2) ReplyRepository
+      3) ReplyDTO 추가
+      4) ReplyService 인터페이스
+         ReplyServiceImpl 클래스
+      5) ReplyController
+  </xmp>  
+  
+  
+   
+  
+</div>
+</body>
+</html>
+
+
+
+
