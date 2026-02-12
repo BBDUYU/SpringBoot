@@ -45,5 +45,7 @@ public interface BoardService {
 	// [4] 게시글 수정
 	void modify(BoardDTO dto);
 	
+	// [5] 삭제
+	void removeWithReplies(Long bno);
 	
 }
