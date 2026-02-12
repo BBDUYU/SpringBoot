@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" type="image/x-icon" href="/images/SiSt.ico">
+<title>2026. 2. 9. 오후 12:26:13</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<link rel="stylesheet" href="/resources/cdn-main/example.css">
+<script src="/resources/cdn-main/example.js"></script>
+<style>
+ span.material-symbols-outlined{
+    vertical-align: text-bottom;
+ }   
+</style>
+</head>
+<body>
+<header>
+  <h1 class="main"><a href="#" style="position: absolute;top:30px;">CHacHa's HOme</a></h1>
+  <ul>
+    <li><a href="#">로그인</a></li>
+    <li><a href="#">회원가입</a></li>
+  </ul>
+</header>
+<div>
+  <xmp class="code"> 
+   /board/register.html
+  </xmp>
+  
+  <h1>Board Register Page</h1>
+    
+  <form th:action="@{/board/register}" th:method="post">
+    <div>
+      <label>Title</label>
+      <input type="text" name="title" placeholder="Enter Title" class="long">
+    </div>
+    <div>
+      <label>Content</label>
+      <textarea rows="5" name="content"  class="long"></textarea>
+    </div>
+    <div>
+      <label>Writer Email</label>
+      <input type="email" name="writerEmail" placeholder="user10@naver.com"  class="long">
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+    
+  <br>
+  
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
