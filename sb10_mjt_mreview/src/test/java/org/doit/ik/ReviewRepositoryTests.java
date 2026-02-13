@@ -55,7 +55,7 @@ class ReviewRepositoryTests {
 	         System.out.println("🎶" +movieReviw.getReviewnum());
 	         System.out.println("\t"+movieReviw.getGrade());
 	         System.out.println("\t"+movieReviw.getText());
-	         //System.out.println("\t"+movieReviw.getMember().getEmail());
+	         System.out.println("\t"+movieReviw.getMember().getEmail());
 	         System.out.println("-".repeat(70));
 	      });
 	}
