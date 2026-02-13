@@ -17,31 +17,30 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 public class ReplyServiceImpl implements ReplyService{
 
-	private final ReplyRepository replyRepository;
+   private final ReplyRepository replyRepository;
 
-	@Override
-	public Long register(ReplyDTO replyDTO) {
-		Reply reply = dtoToEntity(replyDTO);
-		this.replyRepository.save(reply); // entity
-		return reply.getRno();
-	}
+   @Override
+   public Long register(ReplyDTO replyDTO) {
+      Reply reply = dtoToEntity(replyDTO);
+      this.replyRepository.save(reply); // entity
+      return reply.getRno();
+   }
 
-	@Override
-	public List<ReplyDTO> getList(Long bno) {
-		List<Reply> result = this.replyRepository.getRepliesByBoardOrderByRno(
-				Board.builder().bno(bno).build());
-		return result.stream().map(reply->entityToDTO(reply)).collect(Collectors.toList());
-	}
+   @Override
+   public List<ReplyDTO> getList(Long bno) {
+      List<Reply> result = this.replyRepository.getRepliesByBoardOrderByRno(
+            Board.builder().bno(bno).build());
+      return result.stream().map(reply->entityToDTO(reply)).collect(Collectors.toList());
+   }
 
-	@Override
-	public void modify(ReplyDTO replyDTO) {
-		Reply reply = dtoToEntity(replyDTO);
-		this.replyRepository.save(reply);
-	}
+   @Override
+   public void modify(ReplyDTO replyDTO) {
+      Reply reply = dtoToEntity(replyDTO);
+      this.replyRepository.save(reply);
+   }
 
-	@Override
-	public void remove(Long rno) {
-		this.replyRepository.deleteById(rno);
-	}  
-
+   @Override
+   public void remove(Long rno) {
+      this.replyRepository.deleteById(rno);
+   }  
 }

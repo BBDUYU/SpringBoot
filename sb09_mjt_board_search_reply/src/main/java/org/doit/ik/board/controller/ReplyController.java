@@ -46,6 +46,7 @@ public class ReplyController {
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 
+	// 댓글 수정
 	@PutMapping("/{rno}")
 	public ResponseEntity<String> modify(@RequestBody ReplyDTO replyDTO) {
 		log.info("👌 ReplyController.modify()...  replyDTO : " + replyDTO);

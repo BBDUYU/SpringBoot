@@ -18,20 +18,19 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@ToString
+@ToString(exclude = "board")
 public class Reply extends BaseEntity{
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long rno;
-	private String text;
-	private String replyer;
-	
-	
-	// 게시판 연관관계 설정 X
-	@ToString.Exclude
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="bno")
-	private Board board;
 
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private Long rno;
+   private String text;
+   
+   private String replyer;
+   
+   // 게시판 연관관계 설정 X
+   // @ToString.Exclude
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "bno") // FK
+   private Board board;
 }

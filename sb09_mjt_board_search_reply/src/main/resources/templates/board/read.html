@@ -85,7 +85,7 @@ span.material-symbols-outlined {
      } // function formatTime
      
      // 특정 게시글 번호의 댓글을 조회하는 함수
-     function loadJSONDate() {
+     function loadJSONData() {
        // $.ajax()  jquery 메서드만 사용. 
         $.getJSON('/replies/board/'+bno, function (arr){
           // console.log( arr );
@@ -106,7 +106,7 @@ span.material-symbols-outlined {
      }
      
      $(".replyCount").on("click", function() {
-       loadJSONDate(); 
+       loadJSONData(); 
      });
 
      // 댓글 추가버튼 클릭
@@ -144,6 +144,69 @@ span.material-symbols-outlined {
      })	
      
      // 댓글등록 끝///////////////////////////
+     
+     
+     // 댓글수정 시작///////////////////////////
+     // $(".replyList .card-body")
+     $(".replyList").on("click",".card-body",function(){
+		// data-rno = 100
+		var rno = $(this).data("rno")
+		//alert(rno);
+		$("input[name='replyText']").val($(this).find('.card-title').html());
+		$("input[name='replyer']").val($(this).find('.card-subtitle').html());
+		$("input[name='rno']").val(rno);
+		modal.show();
+	 });
+           
+     $(".replyModify").on("click",function(){
+    	 var rno= $("input[name='rno']").val();
+    	 
+    	 var reply = {
+						rno: rno,
+						bno: bno,
+						text: $("input[name='replyText']").val(),
+						replyer:$("input[name='replyer']").val()
+    	 			};
+    	 console.log(reply);
+    	 $.ajax({
+			url:'/replies/'+rno,
+			method:'put',
+			data:JSON.stringify(reply),
+			contentType:'application/json; charset=utf-8',
+			success:function(result){
+				console.log("result: "+result); //success
+				if(result==='success'){
+					alert("댓글이 수정되었습니다");
+					modal.hide();
+					loadJSONData();
+				}
+			}
+    	 }) 
+	 })	
+     // 댓글수정 끝///////////////////////////
+     
+     
+     // 댓글 삭제 시작///////////////////////////
+     $(".replyRemove").on("click", function (){
+    	 var rno= $("input[name='rno']").val();
+	  if( !confirm("삭제하시겠습니까?") ){
+	       return ;
+	  } // 
+	  $.ajax({
+	        url: '/replies/' + rno,
+	        method: 'delete',
+	        success: function (result) {
+	            console.log("삭제 결과: " + result);
+	            if (result === 'success') {
+	                alert("댓글이 삭제되었습니다.");
+	                modal.hide();
+	                loadJSONData(); // 삭제 후 목록 새로고침
+	            }
+	        }
+	    });
+	  
+  }); // $(".modifyBtn").on("click"	
+     // 댓글 삭제 끝///////////////////////////
      
    }); // $( function(){
    </script>
