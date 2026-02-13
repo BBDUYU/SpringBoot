@@ -1,5 +1,8 @@
 package org.doit.ik.mreview.repository;
 
-public interface MovieRepository {
+import org.doit.ik.mreview.entity.Movie;
+import org.springframework.data.jpa.repository.JpaRepository;
 
+public interface MovieRepository extends JpaRepository<Movie, Long>{
+	
 }

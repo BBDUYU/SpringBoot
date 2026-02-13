@@ -1,5 +1,8 @@
 package org.doit.ik.mreview.repository;
 
-public interface ReviewRepository {
+import org.doit.ik.mreview.entity.Review;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ReviewRepository extends JpaRepository<Review, Long>{
 
 }
