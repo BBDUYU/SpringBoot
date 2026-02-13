@@ -71,9 +71,15 @@
 			ReviewRepository
 			
 		src/test/java
-			ㄴ MovieRepositoryTests 생성 : movie 생성
+			ㄴ MovieRepositoryTests 생성 : movie,img 생성
 			ㄴ MemberRepositoryTests 생성 : member 생성
+			ㄴ ReviewRepositoryTests 생성 : review 생성
 		
+		MovieRepository
+			ㄴ Page<Object[]> getListPage(Pageable pageable);
+				ㄴ 단위테스트 : MovieRepositoryTests.java - testGetListPage()
+			ㄴ List<Object[]> getMovieWithAll(@Param("mno")Long mno);  -  특정 영화정보 + 이미지
+				ㄴ 단위테스트 : MovieRepositoryTests.java - testGetMovieWithAll()
   </xmp>  
   
   

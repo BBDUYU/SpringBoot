@@ -1,21 +1,15 @@
 package org.doit.ik;
 
-import java.util.UUID;
 import java.util.stream.IntStream;
 
 import org.doit.ik.mreview.entity.Member;
 import org.doit.ik.mreview.entity.Movie;
-import org.doit.ik.mreview.entity.MovieImage;
 import org.doit.ik.mreview.entity.Review;
-import org.doit.ik.mreview.repository.MemberRepository;
-import org.doit.ik.mreview.repository.MovieImageRepository;
-import org.doit.ik.mreview.repository.MovieRepository;
 import org.doit.ik.mreview.repository.ReviewRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2

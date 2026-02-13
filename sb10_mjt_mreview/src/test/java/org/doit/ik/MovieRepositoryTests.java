@@ -1,5 +1,7 @@
 package org.doit.ik;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.IntStream;
 
@@ -10,6 +12,10 @@ import org.doit.ik.mreview.repository.MovieRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -48,4 +54,28 @@ class MovieRepositoryTests {
 		});
 	}
 	*/
+	/*
+	@Test
+	void testGetListPage() {
+		//Page<Object[]> getListPage(Pageable pageable);
+		Pageable pageable = PageRequest.of(0, 10,Sort.by("mno").descending());
+		Page<Object[]> result=this.movieRepository.getListPage(pageable);
+		
+		// List<Object[]> objectArr=result.getContent();
+		for (Object[] objects : result.getContent()) {
+			System.out.println("@ "+Arrays.toString(objects));
+		}
+	}
+	*/
+	
+	@Test
+	void testGetMovieWithAll() {
+		Long mno = 1L;
+		List<Object[]> result = this.movieRepository.getMovieWithAll(mno);
+		System.out.println("@ @ @"+result);
+		result.forEach(movie->{
+			System.out.println("$ $"+movie[0]+" / "+movie[1]);
+		});
+	}
+	
 }
