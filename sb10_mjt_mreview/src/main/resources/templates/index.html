@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" type="image/x-icon" href="/images/SiSt.ico">
+<title>2026. 2. 10. 오전 9:26:13</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<link rel="stylesheet" href="/resources/cdn-main/example.css">
+<script src="/resources/cdn-main/example.js"></script>
+<style>
+ span.material-symbols-outlined{
+    vertical-align: text-bottom;
+ }   
+</style>
+</head>
+<body>
+<header>
+  <h1 class="main"><a href="#" style="position: absolute;top:30px;">CHacHa's HOme</a></h1>
+  <ul>
+    <li><a href="#">로그인</a></li>
+    <li><a href="#">회원가입</a></li>
+  </ul>
+</header>
+<div>
+
+  <xmp class="code"> 
+	[ M:N ( 다대다 ) 관계 설계 + 구현 ]
+	예)
+		학생	 N	수강	 M	과목
+		
+		DB에서 N:M 관계 처리
+			1:N 테이블생성 N:1
+			
+		JPA에서 N:M 관계 처리
+			1) @ManyToMany 이용
+			2) 별도의 엔티티 생성 @ManyToOne 처리		(***)
+				[매핑 엔티티]
+		
+		실습)
+			영화		리뷰		고객(회원)
+			명사		관계		명사
+					동사
+			영화이미지
+			파일업로드
+			
+			연관관계를 맺기전에 엔티티 먼저 선언
+			매핑엔티티는 마지막단계에 처리
+		
+		패키지 선언
+			1) org.doit.ik.mreview.entity
+			2) org.doit.ik.mreview.repository
+			
+		org.doit.ik.mreview.entity
+			BaseEntity 복사
+			
+		org.doit.ik
+			Application.java
+			@EnableJpaAuditing 복사
+		
+		4개의 엔티티 추가
+			Movie
+			Member 	   엔티티 - m_member
+			MovieImage 엔티티 - 생성된 테이블명 movie_image
+			Review
+		
+		Repository 추가
+			MovieRepository
+			MemberRepository 	   
+			MovieImageRepository 
+			ReviewRepository
+  </xmp>  
+  
+  
+   
+  
+</div>
+</body>
+</html>
+
+
+
+
