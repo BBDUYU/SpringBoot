@@ -83,6 +83,12 @@
 				
 		특정 영화의 모든 리뷰와 회원 닉네임 조회
 			ReviewRepository.java - testFindByMovie()
+			@EntityGraph 설정으로 member 호출
+		
+		회원탈퇴 -> 1. 회원정보 삭제 + 2. 회원이 작성한 리뷰 모두 삭제
+					트랜잭션 처리
+				ㄴ MemberRepositoryTests - testDeleteMember
+			
   </xmp>  
   
   

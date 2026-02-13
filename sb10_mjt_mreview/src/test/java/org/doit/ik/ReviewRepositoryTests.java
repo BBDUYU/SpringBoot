@@ -22,7 +22,7 @@ class ReviewRepositoryTests {
 	private  ReviewRepository reviewRepository;
 
 	// 200개의 영화리뷰 insert
-	/*
+
 	@Test
 	void insertMovieReviews() {
 		IntStream.rangeClosed(1, 200).forEach(i->{
@@ -42,8 +42,8 @@ class ReviewRepositoryTests {
 
 		});
 	}
-	 */
 
+/*
 	@Test
 	void testFindByMovie() {
 		Movie movie = Movie.builder()
@@ -59,5 +59,6 @@ class ReviewRepositoryTests {
 	         System.out.println("-".repeat(70));
 	      });
 	}
+	*/
 }
 

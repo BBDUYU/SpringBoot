@@ -30,7 +30,7 @@ class MovieRepositoryTests {
 	private  MovieRepository movieRepository;
 	
 	// 100개의 영화 insert
-	/*
+
 	@Test
 	void insertMovies() {
 		IntStream.rangeClosed(1, 100).forEach(i->{
@@ -53,7 +53,7 @@ class MovieRepositoryTests {
 			}
 		});
 	}
-	*/
+	
 	/*
 	@Test
 	void testGetListPage() {
@@ -67,7 +67,7 @@ class MovieRepositoryTests {
 		}
 	}
 	*/
-	
+	/*
 	@Test
 	void testGetMovieWithAll() {
 		Long mno = 1L;
@@ -77,5 +77,5 @@ class MovieRepositoryTests {
 			System.out.println("$ $"+movie[0]+" / "+movie[1]);
 		});
 	}
-	
+	*/
 }

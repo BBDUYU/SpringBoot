@@ -11,7 +11,9 @@ import org.doit.ik.mreview.repository.ReviewRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 
+import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -24,7 +26,7 @@ class MemberRepositoryTests {
 	private  ReviewRepository reviewRepository;
 	
 	// 100명의 회원 insert
-
+/*
 	@Test
 	void insertMembers() {
 		IntStream.rangeClosed(1, 100).forEach(i->{
@@ -37,6 +39,21 @@ class MemberRepositoryTests {
 			this.memberRepository.save(member);
 			//	
 		});
+	}
+*/
+	
+	// 리뷰삭제 + 회원탈퇴 
+
+	@Transactional
+	@Commit
+	@Test
+	void testDeleteMember() {
+		Long mid = 2L;
+		Member member = Member.builder()
+				.mid(mid)
+				.build();
+		this.reviewRepository.deleteByMember(member);
+		this.memberRepository.delete(member);
 	}
 
 }
