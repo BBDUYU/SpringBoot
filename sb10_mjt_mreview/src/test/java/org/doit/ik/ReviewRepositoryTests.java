@@ -1,5 +1,6 @@
 package org.doit.ik;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
 import org.doit.ik.mreview.entity.Member;
@@ -19,8 +20,9 @@ class ReviewRepositoryTests {
 
 	@Autowired
 	private  ReviewRepository reviewRepository;
-	
+
 	// 200개의 영화리뷰 insert
+	/*
 	@Test
 	void insertMovieReviews() {
 		IntStream.rangeClosed(1, 200).forEach(i->{
@@ -35,10 +37,27 @@ class ReviewRepositoryTests {
 					.movie(Movie.builder().mno(mno).build())
 					.member(Member.builder().mid(mid).build())
 					.build();
-			
+
 			this.reviewRepository.save(review);
-			
+
 		});
 	}
+	 */
 
+	@Test
+	void testFindByMovie() {
+		Movie movie = Movie.builder()
+				.mno(93L)
+				.build();
+		List<Review> result = this.reviewRepository.findByMovie(movie);
+		
+		result.forEach(movieReviw->{
+	         System.out.println("🎶" +movieReviw.getReviewnum());
+	         System.out.println("\t"+movieReviw.getGrade());
+	         System.out.println("\t"+movieReviw.getText());
+	         //System.out.println("\t"+movieReviw.getMember().getEmail());
+	         System.out.println("-".repeat(70));
+	      });
+	}
 }
+

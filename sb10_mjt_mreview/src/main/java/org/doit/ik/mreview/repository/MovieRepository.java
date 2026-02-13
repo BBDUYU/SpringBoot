@@ -25,4 +25,6 @@ public interface MovieRepository extends JpaRepository<Movie, Long>{
 			+ " left outer join MovieImage mi on mi.movie = m "
 			+ " where m.mno = :mno " )
 	List<Object[]> getMovieWithAll(@Param("mno")Long mno); 
+	
+	
 }

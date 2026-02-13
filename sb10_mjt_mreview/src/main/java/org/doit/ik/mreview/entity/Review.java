@@ -31,13 +31,13 @@ public class Review extends BaseEntity{
 	// 고객 연관관계
 //	@ToString.Exclude
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="mno")
+	@JoinColumn(name="mid")
 	private Member member;
 	
 	// 영화 연관관계
 //	@ToString.Exclude
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="mid")
+	@JoinColumn(name="mno")
 	private Movie movie;
 	
 }
