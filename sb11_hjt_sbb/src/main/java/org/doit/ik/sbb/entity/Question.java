@@ -1,12 +1,16 @@
 package org.doit.ik.sbb.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +27,11 @@ public class Question {
 	
 	@Column(columnDefinition = "TEXT") //글자수를 제한할 수 없는 경우
 	private String content;
-	
-	
 	private LocalDateTime createDate;
+	
+	//mappedBy 속성 : 참조되고있는 속성명을 정의
+	
+	// cascade=CascadeType.REMOVE : 질문이 삭제되면 해당되는 답변도 모두 삭제
+	@OneToMany(mappedBy="question",cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
+	private List<Answer> answerList;
 }

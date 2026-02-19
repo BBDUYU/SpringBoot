@@ -59,4 +59,8 @@ spring.datasource.password=
 	org.doit.ik.sbb.entity
 		ㄴ Question.java
 		ㄴ Answer.java
+		
+11. 리포지터리 작성
+	org.doit.ik.sbb.repository.AnswerRepository
+    org.doit.ik.sbb.repository.QuestionRepository
 
