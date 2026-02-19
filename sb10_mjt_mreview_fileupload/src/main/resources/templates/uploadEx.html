@@ -33,9 +33,28 @@
   <button class="uploadBtn">Upload</button>
    
   <div class="uploadResult">
+  	
   </div>  
 </div>
 <script>
+function showUploadImages(arr){
+    //console.log(arr);      
+    var divArea = $(".uploadResult");
+alert( arr.length );            
+    for( var i=0; i< arr.length; i++ ){
+       var str = "";
+      // divArea.append("<img src='/display?fileName="+arr[i].imageURL+"'>");
+      // divArea.append("<img src='/display?fileName="+arr[i].thumbnailURL+"'>");
+      
+      str +="<div style='border:solid 1px gray'>";
+      str +="<img src='/display?fileName="+arr[i].thumbnailURL+"'>"; 
+      str +="<button class='removeBtn' data-name='"+arr[i].imageURL+"'>REMOVE</button>";        
+      str +="</div>"; 
+      divArea.append(str);
+      
+    }
+  }
+
 $(".uploadBtn").on("click", function(){
     var inputFile = $("input[type='file']");
     var files = inputFile[0].files;
@@ -56,7 +75,7 @@ $(".uploadBtn").on("click", function(){
       dataType: 'json',
       success: function (result){
           console.log(result);
-         //showUploadImages(result);
+          showUploadImages(result);
       },
       error: function (jqXHR, textStatus, errorThrown){
          console.log(textStatus);
