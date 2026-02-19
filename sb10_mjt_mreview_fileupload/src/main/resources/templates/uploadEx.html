@@ -82,6 +82,24 @@ $(".uploadBtn").on("click", function(){
        } 
     });
  }); //  $(".uploadBtn").on("click"
+		 
+ $(".uploadResult").on("click", ".removeBtn",  function(){    
+     var target = $(this);
+     
+     // data-name='"+arr[i].imageURL+"'
+     var fileName = target.data("name");
+     
+     var targetDiv = $(this).closest("div"); 
+     
+     console.log(fileName); 
+     
+     $.post( '/removeFile', {fileName: fileName}, function (result){
+      console.log(result);
+      if(result === true ){
+        targetDiv.remove();
+      } // if
+     } ); 
+   });    // click
 </script>
 </body>
 </html>

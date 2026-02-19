@@ -2,6 +2,7 @@ package org.doit.ik.mreview.contoller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -130,5 +131,22 @@ public class UploadController {
 		}
 		return result;
 	}
-
+	@PostMapping("/removeFile")
+	   public ResponseEntity<Boolean> removeFile(@RequestParam("fileName") String fileName) {
+	      
+	      String srcFileName = null;
+	       try {
+	         srcFileName = URLDecoder.decode(fileName, "UTF-8");
+	         File file = new File(uploadPath + File.separator+srcFileName);
+	          boolean result = file.delete();  // 파일 삭제
+	          File thumbnail = new File(file.getParent(), "s_"+file.getName());
+	          result = thumbnail.delete(); // 섬네일 파일 삭제
+	          
+	         return new ResponseEntity<>(result, HttpStatus.OK);
+	      } catch (UnsupportedEncodingException e) { 
+	         e.printStackTrace();
+	         return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);   // 500오류
+	      }
+	       
+	   }
 }
