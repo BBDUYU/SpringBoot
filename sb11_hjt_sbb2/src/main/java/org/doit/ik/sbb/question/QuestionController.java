@@ -44,7 +44,7 @@ public class QuestionController {
 	}
 	
 	@GetMapping("/create")
-	public void questionCreate() {
+	public void questionCreate(QuestionForm questionForm) {
 		
 	}
 	
