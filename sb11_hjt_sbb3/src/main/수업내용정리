@@ -1,0 +1,20 @@
+[수업내용정리]
+1. sb11_hjt_sbb -> sb11_hjt_sbb2
+
+2. 질문과 관련된 모든 컨트롤러, DAO, DTO 관련 패키지
+question : org.doit.ik.sbb.question 
+answer : org.doit.ik.sbb.answer 
+user : org.doit.ik.sbb.user 
+
+3. org.doit.ik.sbb.MainController
+
+4. org.doit.ik.sbb.question.QuestionController
+4-2. list.html 구현
+
+5. 서비스 필요한 이유
+	1) 복잡한 코드를 모듈화
+	2) 엔티티 객체 <-> DTO 변환
+	
+6. 질문 목록 기능 구현
+6-2. 질문 상세보기 기능 구현
+6-3. 답변등록기능 구현
