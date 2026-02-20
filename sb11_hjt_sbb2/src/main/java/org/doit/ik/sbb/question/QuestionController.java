@@ -2,6 +2,7 @@ package org.doit.ik.sbb.question;
 
 import java.util.List;
 
+import org.doit.ik.sbb.answer.AnswerForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,7 +38,7 @@ public class QuestionController {
 	}
 	
 	@GetMapping("/detail/{id}")
-	public String detail(@PathVariable("id")Integer id,Model model) {
+	public String detail(@PathVariable("id")Integer id,Model model,AnswerForm answerForm) {
 		Question question = this.questionService.getQuestion(id);
 		model.addAttribute("question",question);
 		return "/question/detail";

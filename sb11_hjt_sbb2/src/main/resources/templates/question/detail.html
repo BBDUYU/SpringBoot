@@ -1,7 +1,7 @@
-
 <html layout:decorate="~{/question/layout}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<div layout:fragment="content" class="container my-3">
+<div layout:fragment="content" class="container my-3" >
+  <div class="container my-3">
     <!-- 질문 -->
     <h2 class="border-bottom py-2" th:text="${question.subject}"></h2>
     <div class="card my-3">
@@ -30,10 +30,17 @@
     </div>
     <!-- 답변 반복 끝  -->
     <!-- 답변 작성 -->
-    <form th:action="@{|/answer/create/${question.id}|}" method="post" class="my-3">
-        <textarea name="content" id="content" rows="10" class="form-control"></textarea>
+    <form th:object="${answerForm}" th:action="@{|/answer/create/${question.id}|}" method="post" class="my-3">
+       
+       <!-- 에러정보 alert창 -->
+       <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+         <div th:each="err : ${#fields.allErrors()}" th:text="${err}"></div>
+       </div>
+       
+        <!-- <textarea name="content" id="content" rows="10" class="form-control"></textarea> -->
+        <textarea th:field="*{content}" rows="10" class="form-control"></textarea>
         <input type="submit" value="답변등록" class="btn btn-primary my-2">
     </form>
 </div>
-
-</html>
+  
+</div>
