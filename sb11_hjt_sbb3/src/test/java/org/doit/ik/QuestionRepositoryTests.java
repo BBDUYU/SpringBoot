@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import org.doit.ik.sbb.question.Question;
 import org.doit.ik.sbb.question.QuestionRepository;
+import org.doit.ik.sbb.question.QuestionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -110,4 +111,16 @@ class QuestionRepositoryTests {
       
    }
 */
+   @Autowired
+   private QuestionService questionService;
+   
+   @Test
+   void testJpa() {
+      for (int i = 1; i <= 300; i++) {
+         String subject = String.format("테스트 에디터입니다: [%03d]", i);
+         String content = "냉무";
+         this.questionService.create(subject, content);
+      }
+   }
+   
 }
