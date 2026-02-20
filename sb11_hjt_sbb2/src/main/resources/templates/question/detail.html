@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="shortcut icon" type="image/x-icon" href="/images/SiSt.ico">
-<title>SIST SBB</title>
-<link rel="stylesheet" type="text/css" th:href="@{/question/style.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/bootstrap/bootstrap.min.css}">
-</head>
-<body>
 
-<div class="container my-3">
+<html layout:decorate="~{/question/layout}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content" class="container my-3">
     <!-- 질문 -->
     <h2 class="border-bottom py-2" th:text="${question.subject}"></h2>
     <div class="card my-3">
@@ -45,5 +36,4 @@
     </form>
 </div>
 
-</body>
 </html>
