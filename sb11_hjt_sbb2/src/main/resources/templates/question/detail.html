@@ -32,9 +32,8 @@
     <!-- 답변 작성 -->
     <form th:object="${answerForm}" th:action="@{|/answer/create/${question.id}|}" method="post" class="my-3">
        
-       <!-- 에러정보 alert창 -->
-       <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
-         <div th:each="err : ${#fields.allErrors()}" th:text="${err}"></div>
+       <div th:replace="~{form_errors.html::formErrorsFragment}">
+       
        </div>
        
         <!-- <textarea name="content" id="content" rows="10" class="form-control"></textarea> -->
