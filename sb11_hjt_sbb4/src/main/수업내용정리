@@ -1,0 +1,129 @@
+[수업내용정리]
+1. sb11_hjt_sbb3 -> sb11_hjt_sbb4
+2. 스프링 시큐리티
+
+*** AWS 계정 생성 ***
+ 
+3. build.gradle 추가
+/*Spring Security*/
+   implementation 'org.springframework.boot:spring-boot-starter-security'
+   /*thymeleaf-extras-springsecurity6 패키지는 타임리프 템플릿 엔진과 스프링 시큐리티 프레임워크를 함께 사용할 때 필요한 타임리프의 확장 기능*/
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+
+4. Spring legacy project 복습
+
+5. http://localhost/login 스프링시큐리티 기본제공로그인페이지
+
+6. servlet-context.xml X -> org.doit.ik.sbb.security.SecurityConfig 스프링 시큐리티 설정
+------------
+package org.doit.ik.security.config;
+
+import org.doit.ik.security.CustomAccessDeniedHandler;
+import org.doit.ik.security.CustomLoginSuccessHandler;
+import org.doit.ik.security.CustomUserDetailsService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final CustomUserDetailsService customUserDetailsService;
+    private final CustomLoginSuccessHandler customLoginSuccessHandler;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
+
+    public SecurityConfig(CustomUserDetailsService customUserDetailsService,
+                          CustomLoginSuccessHandler customLoginSuccessHandler,
+                          CustomAccessDeniedHandler customAccessDeniedHandler) {
+        this.customUserDetailsService = customUserDetailsService;
+        this.customLoginSuccessHandler = customLoginSuccessHandler;
+        this.customAccessDeniedHandler = customAccessDeniedHandler;
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+
+        http
+            .authorizeRequests()
+
+                // 정적 자원 보안 제외
+                .antMatchers("/static/**", "/design/**", "/css/**", "/js/**")
+                .permitAll()
+
+                // 권한 설정
+                .antMatchers("/customer/noticeReg.htm")
+                .authenticated()
+
+                .antMatchers("/customer/noticeDel.htm")
+                .hasRole("ADMIN")
+
+                .anyRequest()
+                .permitAll()
+
+            .and()
+                .formLogin()
+                .loginPage("/joinus/login.htm")
+                .defaultSuccessUrl("/index.htm")
+                .failureUrl("/joinus/login.htm?error=true")
+                .successHandler(customLoginSuccessHandler)
+
+            .and()
+                .logout()
+                .logoutUrl("/joinus/logout.htm")
+                .invalidateHttpSession(true)
+                .logoutSuccessUrl("/")
+
+            .and()
+                .exceptionHandling()
+                .accessDeniedHandler(customAccessDeniedHandler);
+
+        // CSRF 설정 (XML에서 주석 처리되어 있으므로 기본값 유지)
+        // http.csrf().disable();
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+            .userDetailsService(customUserDetailsService)
+            .passwordEncoder(passwordEncoder());
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+}
+------------------------
+http://localhost/h2-console -- 접속 거부 403 오류
+스프링레거시 CSRF 방어기능에 의해 h2-console접근거부
+CSRF 처리시 h2콘솔 예외처리 필요
+
+스프링 부트에서 X-Frame-Options 헤더는 클릭재킹 공격을 막기 위해 사용한다. 
+클릭재킹은 사용자의 의도와 다른 작업이 수행되도록 속이는 보안 공격 기술이다.
+
+7. 회원가입
+	1. 회원엔티티 추가
+		org.doit.ik.sbb.user.SiteUser 
+	2. org.doit.ik.sbb.user.UserRepository
+	3. org.doit.ik.sbb.user.UserService
+		BCryptPasswordEncoder cryptPasswordEncoder = new BCryptPasswordEncoder();
+			ㄴ 빈으로 등록
+	4. org.doit.ik.sbb.user.UserController
+	
+			@GetMapping("/signup")
+			public String signup(UserCreateForm userCreateForm) {
+				return "/user/signup_form";
+			}
+		회원가입 요청 -> 컨트롤러 추가
+	
+	5. org.doit.ik.sbb.user.UserCreateForm  DTO 추가
+		/user/signup 요청 -> 회원 가입 html  응답 -> POST 요청
+		
+	
+	
