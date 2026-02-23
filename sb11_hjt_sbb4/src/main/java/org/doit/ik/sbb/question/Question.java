@@ -1,5 +1,6 @@
 package org.doit.ik.sbb.question;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -41,4 +42,6 @@ public class Question {
 	
 	@ManyToOne
 	private SiteUser author;
+	
+	private LocalDateTime modifyDate;
 }

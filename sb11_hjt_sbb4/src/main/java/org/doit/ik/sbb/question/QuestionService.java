@@ -43,7 +43,7 @@ public class QuestionService {
 		q.setContent(content);
 		q.setCreateDate(LocalDateTime.now());
 		q.setAuthor(author);
-		
+
 		this.questionRepository.save(q);
 	}
 
@@ -58,12 +58,22 @@ public class QuestionService {
 
 	}
 
-	   // 페이징 처리 O
-	   public Page<Question> getList(int page, int size){
-	                                 // 0(1번페이지)
-	      Pageable pageable = PageRequest.of(page-1, size, Sort.by("id").descending());
-	      return this.questionRepository.findAll(pageable);
-	   }
+	// 페이징 처리 O
+	public Page<Question> getList(int page, int size){
+		// 0(1번페이지)
+		Pageable pageable = PageRequest.of(page-1, size, Sort.by("id").descending());
+		return this.questionRepository.findAll(pageable);
+	}
 
-
+	// 질문수정버튼을 클릭하면 컨트롤러의 메서드 -> 이 메서드 호출
+	public void modify(Question question, String subject, String content) {
+		question.setSubject(subject);
+		question.setContent(content);
+		question.setModifyDate(LocalDateTime.now());
+		this.questionRepository.save(question);
+	}
+	
+	public void delete(Question question) {
+		this.questionRepository.delete(question);
+	}
 }
