@@ -1,0 +1,18 @@
+package org.doit.ik.sbb.answer;
+
+import java.util.List;
+
+import org.doit.ik.sbb.question.Question;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+public interface AnswerRepository extends JpaRepository<Answer, Integer>{
+	// [1] 커스텀 쿼리메서드
+	List<Answer> findByQuestionId(Integer questionId);
+	List<Answer> findByQuestion(Question entity);
+	
+	// [2] JPQL
+	@Query("select a from Answer a where a.question.id = :qid")
+	List<Answer> findByQId(@Param("qid") Integer questionId);
+}
