@@ -1,0 +1,17 @@
+[수업내용정리]
+1. sb11_hjt_sbb5 -> sb11_hjt_sbb6
+
+2. 마크다운 설명
+	vscode설치
+3. https://www.markdownguide.org/getting-started/
+4. 마크다운 사용
+   > 인용구문
+5. implementation 'org.commonmark:commonmark:0.21.0' -- 마크다운을 사용하기위한 라이브러리 설치 버전
+스프링부트는 라이브러리 관리 : 버전 X
+
+6. com.mysite.sbb.CommonUtil.java 추가
+   HTML 태그형식의 문자열 반환 markdown(String 마크다운형식의 문자열) 메서드
+
+7. detail.html
+	질문내용출력 CommonUtil.markdown() html출력
+	답변내용출력 CommonUtil.markdown() html출력
